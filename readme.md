@@ -1,6 +1,10 @@
-# go-stash
+# go-stash简介
 
-go-stash is a free and open server-side data processing pipeline that ingests data from Kafka, transforms it, and then sends it to ElasticSearch. go-stash has ~5x throughput than logstash.
+go-stash是一个高效的从Kafka获取，根据配置的规则进行处理，然后发送到ElasticSearch集群的工具。
+
+go-stash有大概logstash 5倍的吞吐性能，并且部署简单，一个可执行文件即可。
+
+![go-stash](doc/flow.png)
 
 ## Quick Start
 
@@ -8,7 +12,7 @@ go-stash is a free and open server-side data processing pipeline that ingests da
 gostash -f etc/config.json
 ```
 
-config.json looks like:
+config.json示例如下:
 
 ```json
 {
