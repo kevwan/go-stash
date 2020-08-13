@@ -1,6 +1,6 @@
 # go-stash
 
-go-stash is a free and open server-side data processing pipeline that ingests data from Kafka, transforms it, and then sends it to ElasticSearch.
+go-stash is a free and open server-side data processing pipeline that ingests data from Kafka, transforms it, and then sends it to ElasticSearch. go-stash has ~5x throughput than logstash.
 
 ## Quick Start
 
