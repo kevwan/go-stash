@@ -25,8 +25,7 @@ config.json示例如下:
             ],
             "Topic": "k8slog",
             "Group": "pro",
-            "NumProducers": 16,
-            "MetricsUrl": "http://localhost:2222/add"
+            "NumProducers": 16
         }
     },
     "Filters": [
