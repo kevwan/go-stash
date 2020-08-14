@@ -1,11 +1,6 @@
 package filter
 
-import (
-	"strings"
-
-	"github.com/globalsign/mgo/bson"
-	"github.com/tal-tech/go-stash/stash/config"
-)
+import "github.com/tal-tech/go-stash/stash/config"
 
 const (
 	filterDrop         = "drop"
@@ -31,73 +26,4 @@ func CreateFilters(c config.Config) []FilterFunc {
 	}
 
 	return filters
-}
-
-func DropFilter(conds []config.Condition) FilterFunc {
-	return func(m map[string]interface{}) map[string]interface{} {
-		var qualify bool
-		for _, cond := range conds {
-			var qualifyOnce bool
-			switch cond.Type {
-			case typeMatch:
-				qualifyOnce = cond.Value == m[cond.Key]
-			case typeContains:
-				if val, ok := m[cond.Key].(string); ok {
-					qualifyOnce = strings.Contains(val, cond.Value)
-				}
-			}
-
-			switch cond.Op {
-			case opAnd:
-				if !qualifyOnce {
-					return m
-				} else {
-					qualify = true
-				}
-			case opOr:
-				if qualifyOnce {
-					qualify = true
-				}
-			}
-		}
-
-		if qualify {
-			return nil
-		} else {
-			return m
-		}
-	}
-}
-
-func RemoveFieldFilter(fields []string) FilterFunc {
-	return func(m map[string]interface{}) map[string]interface{} {
-		for _, field := range fields {
-			delete(m, field)
-		}
-		return m
-	}
-}
-
-func AddUriFieldFilter(inField, outFirld string) FilterFunc {
-	return func(m map[string]interface{}) map[string]interface{} {
-		if val, ok := m[inField].(string); ok {
-			var datas []string
-			idx := strings.Index(val, "?")
-			if idx < 0 {
-				datas = strings.Split(val, "/")
-			} else {
-				datas = strings.Split(val[:idx], "/")
-			}
-
-			for i, data := range datas {
-				if bson.IsObjectIdHex(data) {
-					datas[i] = "*"
-				}
-			}
-
-			m[outFirld] = strings.Join(datas, "/")
-		}
-
-		return m
-	}
 }
