@@ -11,7 +11,7 @@ import (
 	"github.com/tal-tech/go-stash/stash/filter"
 	"github.com/tal-tech/go-stash/stash/handler"
 	"github.com/tal-tech/go-zero/core/conf"
-	"github.com/tal-tech/go-zero/core/lang"
+	"github.com/tal-tech/go-zero/core/logx"
 	"github.com/tal-tech/go-zero/core/proc"
 )
 
@@ -30,13 +30,13 @@ func main() {
 		elastic.SetSniff(false),
 		elastic.SetURL(c.Output.ElasticSearch.Hosts...),
 	)
-	lang.Must(err)
+	logx.Must(err)
 
 	indexFormat := c.Output.ElasticSearch.DailyIndexPrefix + dateFormat
 	var loc *time.Location
 	if len(c.Output.ElasticSearch.TimeZone) > 0 {
 		loc, err = time.LoadLocation(c.Output.ElasticSearch.TimeZone)
-		lang.Must(err)
+		logx.Must(err)
 	} else {
 		loc = time.Local
 	}
@@ -46,7 +46,7 @@ func main() {
 
 	filters := filter.CreateFilters(c)
 	writer, err := es.NewWriter(c.Output.ElasticSearch, indexer)
-	lang.Must(err)
+	logx.Must(err)
 
 	handle := handler.NewHandler(writer)
 	handle.AddFilters(filters...)
