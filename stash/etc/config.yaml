@@ -1,20 +1,4 @@
-# go-stash简介
-
-go-stash是一个高效的从Kafka获取，根据配置的规则进行处理，然后发送到ElasticSearch集群的工具。
-
-go-stash有大概logstash 5倍的吞吐性能，并且部署简单，一个可执行文件即可。
-
-![go-stash](doc/flow.png)
-
-## Quick Start
-
-```shell
-gostash -f etc/config.yaml
-```
-
-config.yaml示例如下:
-
-```yaml
+---
 Input:
   Kafka:
     Name: gostash
@@ -56,8 +40,3 @@ Output:
       - 172.16.141.4:9200
       - 172.16.141.5:9200
     DailyIndexPrefix: k8s_pro-
-```
-
-### 微信交流群
-
-添加我的微信：kevwan，请注明go-stash，我拉进go-stash社区群🤝
