@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/olivere/elastic"
-	"github.com/tal-tech/go-stash/kq"
+	"github.com/tal-tech/go-queue/kq"
 	"github.com/tal-tech/go-stash/stash/config"
 	"github.com/tal-tech/go-stash/stash/es"
 	"github.com/tal-tech/go-stash/stash/filter"

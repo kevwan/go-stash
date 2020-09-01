@@ -3,7 +3,7 @@ package config
 import (
 	"time"
 
-	"github.com/tal-tech/go-stash/kq"
+	"github.com/tal-tech/go-queue/kq"
 )
 
 type (
