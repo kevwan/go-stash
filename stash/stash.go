@@ -13,6 +13,7 @@ import (
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/core/logx"
 	"github.com/tal-tech/go-zero/core/proc"
+	"github.com/tal-tech/go-zero/core/service"
 )
 
 const dateFormat = "2006.01.02"
@@ -26,31 +27,37 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 	proc.SetTimeoutToForceQuit(c.GracePeriod)
 
-	client, err := elastic.NewClient(
-		elastic.SetSniff(false),
-		elastic.SetURL(c.Output.ElasticSearch.Hosts...),
-	)
-	logx.Must(err)
+	group := service.NewServiceGroup()
+	defer group.Stop()
 
-	indexFormat := c.Output.ElasticSearch.DailyIndexPrefix + dateFormat
-	var loc *time.Location
-	if len(c.Output.ElasticSearch.TimeZone) > 0 {
-		loc, err = time.LoadLocation(c.Output.ElasticSearch.TimeZone)
+	for _, processor := range c.Processors {
+		client, err := elastic.NewClient(
+			elastic.SetSniff(false),
+			elastic.SetURL(processor.Output.ElasticSearch.Hosts...),
+		)
 		logx.Must(err)
-	} else {
-		loc = time.Local
+
+		indexFormat := processor.Output.ElasticSearch.DailyIndexPrefix + dateFormat
+		var loc *time.Location
+		if len(processor.Output.ElasticSearch.TimeZone) > 0 {
+			loc, err = time.LoadLocation(processor.Output.ElasticSearch.TimeZone)
+			logx.Must(err)
+		} else {
+			loc = time.Local
+		}
+		indexer := es.NewIndex(client, func(t time.Time) string {
+			return t.In(loc).Format(indexFormat)
+		})
+
+		filters := filter.CreateFilters(processor)
+		writer, err := es.NewWriter(processor.Output.ElasticSearch, indexer)
+		logx.Must(err)
+
+		handle := handler.NewHandler(writer)
+		handle.AddFilters(filters...)
+		handle.AddFilters(filter.AddUriFieldFilter("url", "uri"))
+		group.Add(kq.MustNewQueue(processor.Input.Kafka, handle))
 	}
-	indexer := es.NewIndex(client, func(t time.Time) string {
-		return t.In(loc).Format(indexFormat)
-	})
 
-	filters := filter.CreateFilters(c)
-	writer, err := es.NewWriter(c.Output.ElasticSearch, indexer)
-	logx.Must(err)
-
-	handle := handler.NewHandler(writer)
-	handle.AddFilters(filters...)
-	handle.AddFilters(filter.AddUriFieldFilter("url", "uri"))
-	q := kq.MustNewQueue(c.Input.Kafka, handle)
-	q.Start()
+	group.Start()
 }

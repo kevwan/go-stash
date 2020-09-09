@@ -13,10 +13,10 @@ const (
 
 type FilterFunc func(map[string]interface{}) map[string]interface{}
 
-func CreateFilters(c config.Config) []FilterFunc {
+func CreateFilters(p config.Processor) []FilterFunc {
 	var filters []FilterFunc
 
-	for _, f := range c.Filters {
+	for _, f := range p.Filters {
 		switch f.Action {
 		case filterDrop:
 			filters = append(filters, DropFilter(f.Conditions))

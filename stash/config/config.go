@@ -28,7 +28,7 @@ type (
 		Fields     []string    `json:",optional"`
 	}
 
-	Config struct {
+	Processor struct {
 		Input struct {
 			Kafka kq.KqConf
 		}
@@ -36,6 +36,10 @@ type (
 		Output  struct {
 			ElasticSearch ElasticSearchConf
 		}
+	}
+
+	Config struct {
+		Processors  []Processor
 		GracePeriod time.Duration `json:",default=10s"`
 	}
 )
