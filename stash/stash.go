@@ -18,7 +18,7 @@ import (
 
 const dateFormat = "2006.01.02"
 
-var configFile = flag.String("f", "etc/config.json", "Specify the config file")
+var configFile = flag.String("f", "etc/config.yaml", "Specify the config file")
 
 func main() {
 	flag.Parse()
