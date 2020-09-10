@@ -17,6 +17,7 @@ type (
 	ElasticSearchConf struct {
 		Hosts            []string
 		DailyIndexPrefix string
+		DocType          string `json:",default=doc"`
 		TimeZone         string `json:",optional"`
 		MaxChunkBytes    int    `json:",default=1048576"`
 		Compress         bool   `json:",default=false"`

@@ -10,10 +10,9 @@ import (
 	"github.com/tal-tech/go-zero/core/logx"
 )
 
-const docType = "doc"
-
 type (
 	Writer struct {
+		docType  string
 		client   *elastic.Client
 		indexer  *Index
 		inserter *executors.ChunkExecutor
@@ -36,6 +35,7 @@ func NewWriter(c config.ElasticSearchConf, indexer *Index) (*Writer, error) {
 	}
 
 	writer := Writer{
+		docType: c.DocType,
 		client:  client,
 		indexer: indexer,
 	}
@@ -54,7 +54,7 @@ func (w *Writer) execute(vals []interface{}) {
 	var bulk = w.client.Bulk()
 	for _, val := range vals {
 		pair := val.(valueWithTime)
-		req := elastic.NewBulkIndexRequest().Index(w.indexer.GetIndex(pair.t)).Type(docType).Doc(pair.val)
+		req := elastic.NewBulkIndexRequest().Index(w.indexer.GetIndex(pair.t)).Type(w.docType).Doc(pair.val)
 		bulk.Add(req)
 	}
 	_, err := bulk.Do(context.Background())
