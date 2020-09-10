@@ -32,7 +32,7 @@ type (
 		Input struct {
 			Kafka kq.KqConf
 		}
-		Filters []Filter
+		Filters []Filter `json:",optional"`
 		Output  struct {
 			ElasticSearch ElasticSearchConf
 		}
