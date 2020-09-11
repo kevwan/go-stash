@@ -37,7 +37,6 @@ func main() {
 		)
 		logx.Must(err)
 
-		indexFormat := processor.Output.ElasticSearch.DailyIndexPrefix + dateFormat
 		var loc *time.Location
 		if len(processor.Output.ElasticSearch.TimeZone) > 0 {
 			loc, err = time.LoadLocation(processor.Output.ElasticSearch.TimeZone)
@@ -45,10 +44,7 @@ func main() {
 		} else {
 			loc = time.Local
 		}
-		indexer := es.NewIndex(client, func(t time.Time) string {
-			return t.In(loc).Format(indexFormat)
-		})
-
+		indexer := es.NewIndex(client, processor.Output.ElasticSearch.Index, loc)
 		filters := filter.CreateFilters(processor)
 		writer, err := es.NewWriter(processor.Output.ElasticSearch, indexer)
 		logx.Must(err)

@@ -1,16 +1,9 @@
 package handler
 
 import (
-	"time"
-
 	jsoniter "github.com/json-iterator/go"
 	"github.com/tal-tech/go-stash/stash/es"
 	"github.com/tal-tech/go-stash/stash/filter"
-)
-
-const (
-	timestampFormat = "2006-01-02T15:04:05.000Z"
-	timestampKey    = "@timestamp"
 )
 
 type MessageHandler struct {
@@ -42,22 +35,5 @@ func (mh *MessageHandler) Consume(_, val string) error {
 		}
 	}
 
-	bs, err := jsoniter.Marshal(m)
-	if err != nil {
-		return err
-	}
-
-	return mh.writer.Write(mh.getTime(m), string(bs))
-}
-
-func (mh *MessageHandler) getTime(m map[string]interface{}) time.Time {
-	if ti, ok := m[timestampKey]; ok {
-		if ts, ok := ti.(string); ok {
-			if t, err := time.Parse(timestampFormat, ts); err == nil {
-				return t
-			}
-		}
-	}
-
-	return time.Now()
+	return mh.writer.Write(m)
 }

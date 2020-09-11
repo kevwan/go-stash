@@ -2,8 +2,8 @@ package es
 
 import (
 	"context"
-	"time"
 
+	jsoniter "github.com/json-iterator/go"
 	"github.com/olivere/elastic"
 	"github.com/tal-tech/go-stash/stash/config"
 	"github.com/tal-tech/go-zero/core/executors"
@@ -18,9 +18,9 @@ type (
 		inserter *executors.ChunkExecutor
 	}
 
-	valueWithTime struct {
-		t   time.Time
-		val string
+	valueWithIndex struct {
+		index string
+		val   string
 	}
 )
 
@@ -43,18 +43,25 @@ func NewWriter(c config.ElasticSearchConf, indexer *Index) (*Writer, error) {
 	return &writer, nil
 }
 
-func (w *Writer) Write(t time.Time, val string) error {
-	return w.inserter.Add(valueWithTime{
-		t:   t,
-		val: val,
+func (w *Writer) Write(m map[string]interface{}) error {
+	bs, err := jsoniter.Marshal(m)
+	if err != nil {
+		return err
+	}
+
+	index := w.indexer.GetIndex(m)
+	val := string(bs)
+	return w.inserter.Add(valueWithIndex{
+		index: index,
+		val:   val,
 	}, len(val))
 }
 
 func (w *Writer) execute(vals []interface{}) {
 	var bulk = w.client.Bulk()
 	for _, val := range vals {
-		pair := val.(valueWithTime)
-		req := elastic.NewBulkIndexRequest().Index(w.indexer.GetIndex(pair.t)).Type(w.docType).Doc(pair.val)
+		pair := val.(valueWithIndex)
+		req := elastic.NewBulkIndexRequest().Index(pair.index).Type(w.docType).Doc(pair.val)
 		bulk.Add(req)
 	}
 	_, err := bulk.Do(context.Background())
