@@ -16,8 +16,6 @@ import (
 	"github.com/tal-tech/go-zero/core/service"
 )
 
-const dateFormat = "2006.01.02"
-
 var configFile = flag.String("f", "etc/config.yaml", "Specify the config file")
 
 func main() {

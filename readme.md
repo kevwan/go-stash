@@ -56,7 +56,7 @@ Processors:
       Hosts:
         - "172.16.141.4:9200"
         - "172.16.141.5:9200"
-      DailyIndexPrefix: k8s_pro-
+      Index: {.event}-2006.01.02
 ```
 
 ### 微信交流群
