@@ -35,6 +35,10 @@ func main() {
 		)
 		logx.Must(err)
 
+		filters := filter.CreateFilters(processor)
+		writer, err := es.NewWriter(processor.Output.ElasticSearch)
+		logx.Must(err)
+
 		var loc *time.Location
 		if len(processor.Output.ElasticSearch.TimeZone) > 0 {
 			loc, err = time.LoadLocation(processor.Output.ElasticSearch.TimeZone)
@@ -43,11 +47,7 @@ func main() {
 			loc = time.Local
 		}
 		indexer := es.NewIndex(client, processor.Output.ElasticSearch.Index, loc)
-		filters := filter.CreateFilters(processor)
-		writer, err := es.NewWriter(processor.Output.ElasticSearch, indexer)
-		logx.Must(err)
-
-		handle := handler.NewHandler(writer)
+		handle := handler.NewHandler(writer, indexer)
 		handle.AddFilters(filters...)
 		handle.AddFilters(filter.AddUriFieldFilter("url", "uri"))
 		group.Add(kq.MustNewQueue(processor.Input.Kafka, handle))

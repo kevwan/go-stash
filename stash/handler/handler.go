@@ -8,12 +8,14 @@ import (
 
 type MessageHandler struct {
 	writer  *es.Writer
+	indexer *es.Index
 	filters []filter.FilterFunc
 }
 
-func NewHandler(writer *es.Writer) *MessageHandler {
+func NewHandler(writer *es.Writer, indexer *es.Index) *MessageHandler {
 	return &MessageHandler{
-		writer: writer,
+		writer:  writer,
+		indexer: indexer,
 	}
 }
 
@@ -29,11 +31,17 @@ func (mh *MessageHandler) Consume(_, val string) error {
 		return err
 	}
 
+	index := mh.indexer.GetIndex(m)
 	for _, proc := range mh.filters {
 		if m = proc(m); m == nil {
 			return nil
 		}
 	}
 
-	return mh.writer.Write(m)
+	bs, err := jsoniter.Marshal(m)
+	if err != nil {
+		return err
+	}
+
+	return mh.writer.Write(index, string(bs))
 }

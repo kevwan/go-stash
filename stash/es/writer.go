@@ -3,7 +3,6 @@ package es
 import (
 	"context"
 
-	jsoniter "github.com/json-iterator/go"
 	"github.com/olivere/elastic"
 	"github.com/tal-tech/go-stash/stash/config"
 	"github.com/tal-tech/go-zero/core/executors"
@@ -14,7 +13,6 @@ type (
 	Writer struct {
 		docType  string
 		client   *elastic.Client
-		indexer  *Index
 		inserter *executors.ChunkExecutor
 	}
 
@@ -24,7 +22,7 @@ type (
 	}
 )
 
-func NewWriter(c config.ElasticSearchConf, indexer *Index) (*Writer, error) {
+func NewWriter(c config.ElasticSearchConf) (*Writer, error) {
 	client, err := elastic.NewClient(
 		elastic.SetSniff(false),
 		elastic.SetURL(c.Hosts...),
@@ -37,20 +35,12 @@ func NewWriter(c config.ElasticSearchConf, indexer *Index) (*Writer, error) {
 	writer := Writer{
 		docType: c.DocType,
 		client:  client,
-		indexer: indexer,
 	}
 	writer.inserter = executors.NewChunkExecutor(writer.execute, executors.WithChunkBytes(c.MaxChunkBytes))
 	return &writer, nil
 }
 
-func (w *Writer) Write(m map[string]interface{}) error {
-	bs, err := jsoniter.Marshal(m)
-	if err != nil {
-		return err
-	}
-
-	index := w.indexer.GetIndex(m)
-	val := string(bs)
+func (w *Writer) Write(index, val string) error {
 	return w.inserter.Add(valueWithIndex{
 		index: index,
 		val:   val,
