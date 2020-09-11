@@ -1,10 +1,10 @@
-English | [简体中文](readme-cn.md)
+[English](readme.md) | 简体中文
 
-# go-stash
+# go-stash简介
 
-go-stash is a high performance, free and open source server-side data processing pipeline that ingests data from Kafka, processes it, and then sends it to ElasticSearch. 
+go-stash是一个高效的从Kafka获取，根据配置的规则进行处理，然后发送到ElasticSearch集群的工具。
 
-go-stash is about 4x throughput more than logstash, and easy to deploy, only one executable file.
+go-stash有大概logstash 5倍的吞吐性能，并且部署简单，一个可执行文件即可。
 
 ![go-stash](doc/flow.png)
 
@@ -14,7 +14,7 @@ go-stash is about 4x throughput more than logstash, and easy to deploy, only one
 gostash -f etc/config.yaml
 ```
 
-config.yaml example as below:
+config.yaml示例如下:
 
 ```yaml
 Processors:
@@ -60,3 +60,7 @@ Processors:
         - "172.16.141.5:9200"
       Index: {.event}-2006.01.02
 ```
+
+### 微信交流群
+
+添加我的微信：kevwan，请注明go-stash，我拉进go-stash社区群🤝
