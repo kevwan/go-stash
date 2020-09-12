@@ -15,7 +15,6 @@ import (
 )
 
 const (
-	sharedCallsKey  = "ensureIndex"
 	timestampFormat = "2006-01-02T15:04:05.000Z"
 	timestampKey    = "@timestamp"
 )
@@ -84,7 +83,7 @@ func (idx *Index) GetIndex(m map[string]interface{}) string {
 }
 
 func (idx *Index) ensureIndex(index string) error {
-	_, err := idx.sharedCalls.Do(sharedCallsKey, func() (i interface{}, err error) {
+	_, err := idx.sharedCalls.Do(index, func() (i interface{}, err error) {
 		idx.lock.Lock()
 		defer idx.lock.Unlock()
 
