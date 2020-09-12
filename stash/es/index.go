@@ -91,6 +91,12 @@ func (idx *Index) ensureIndex(index string) error {
 			return nil, nil
 		}
 
+		defer func() {
+			if err == nil {
+				idx.indices[index] = lang.Placeholder
+			}
+		}()
+
 		existsService := elastic.NewIndicesExistsService(idx.client)
 		existsService.Index([]string{index})
 		exist, err := existsService.Do(context.Background())
@@ -110,7 +116,6 @@ func (idx *Index) ensureIndex(index string) error {
 			return nil, err
 		}
 
-		idx.indices[index] = lang.Placeholder
 		return nil, nil
 	})
 	return err
