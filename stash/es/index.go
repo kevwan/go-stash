@@ -48,6 +48,8 @@ func NewIndex(client *elastic.Client, indexFormat string, loc *time.Location) *I
 			for _, attr := range attrs {
 				if val, ok := m[attr]; ok {
 					vals = append(vals, val)
+				} else {
+					vals = append(vals, "")
 				}
 			}
 			return getTime(m).In(loc).Format(fmt.Sprintf(format, vals...))
