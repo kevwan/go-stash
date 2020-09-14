@@ -39,4 +39,4 @@ Processors:
       Hosts:
         - "172.16.141.4:9200"
         - "172.16.141.5:9200"
-      Index: "{.event}-{{yy-mm-dd}}"
+      Index: "{.event}-{{yyyy-MM-dd}}"

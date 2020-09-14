@@ -58,7 +58,9 @@ Processors:
       Hosts:
         - "172.16.141.4:9200"
         - "172.16.141.5:9200"
-      Index: {.event}-2006.01.02
+      # {.event}是json输入的event属性值
+      # {{yyyy-MM-dd}}表示日期，比如2020-09-09
+      Index: {.event}-{{yyyy-MM-dd}}
 ```
 
 ### 微信交流群

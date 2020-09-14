@@ -58,5 +58,7 @@ Processors:
       Hosts:
         - "172.16.141.4:9200"
         - "172.16.141.5:9200"
-      Index: {.event}-2006.01.02
+      # {.event} is the value of the json attribute from input
+      # {{yyyy-MM-dd}} means date, like 2020-09-09
+      Index: {.event}-{{yyyy-MM-dd}}
 ```

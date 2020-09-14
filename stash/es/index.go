@@ -12,16 +12,21 @@ import (
 	"github.com/tal-tech/go-zero/core/lang"
 	"github.com/tal-tech/go-zero/core/logx"
 	"github.com/tal-tech/go-zero/core/syncx"
+	"github.com/vjeantet/jodaTime"
 )
 
 const (
 	timestampFormat = "2006-01-02T15:04:05.000Z"
 	timestampKey    = "@timestamp"
+	leftBrace       = '{'
+	rightBrace      = '}'
+	dot             = '.'
 )
 
 const (
 	stateNormal = iota
 	stateWrap
+	stateVar
 	stateDot
 )
 
@@ -39,29 +44,9 @@ type (
 )
 
 func NewIndex(client *elastic.Client, indexFormat string, loc *time.Location) *Index {
-	var formatter func(map[string]interface{}) string
-	format, attrs := getFormat(indexFormat)
-	if len(attrs) > 0 {
-		formatter = func(m map[string]interface{}) string {
-			var vals []interface{}
-			for _, attr := range attrs {
-				if val, ok := m[attr]; ok {
-					vals = append(vals, val)
-				} else {
-					vals = append(vals, "")
-				}
-			}
-			return getTime(m).In(loc).Format(fmt.Sprintf(format, vals...))
-		}
-	} else {
-		formatter = func(m map[string]interface{}) string {
-			return getTime(m).In(loc).Format(format)
-		}
-	}
-
 	return &Index{
 		client:      client,
-		indexFormat: formatter,
+		indexFormat: buildIndexFormatter(indexFormat, loc),
 		indices:     make(map[string]lang.PlaceholderType),
 		sharedCalls: syncx.NewSharedCalls(),
 	}
@@ -121,6 +106,36 @@ func (idx *Index) ensureIndex(index string) error {
 	return err
 }
 
+func buildIndexFormatter(indexFormat string, loc *time.Location) func(map[string]interface{}) string {
+	format, attrs, timePos := getFormat(indexFormat)
+	if len(attrs) == 0 {
+		return func(m map[string]interface{}) string {
+			return format
+		}
+	}
+
+	return func(m map[string]interface{}) string {
+		var vals []interface{}
+		for i, attr := range attrs {
+			if i == timePos {
+				vals = append(vals, formatTime(attr, getTime(m).In(loc)))
+				continue
+			}
+
+			if val, ok := m[attr]; ok {
+				vals = append(vals, val)
+			} else {
+				vals = append(vals, "")
+			}
+		}
+		return fmt.Sprintf(format, vals...)
+	}
+}
+
+func formatTime(format string, t time.Time) string {
+	return jodaTime.Format(format, t)
+}
+
 func getTime(m map[string]interface{}) time.Time {
 	if ti, ok := m[timestampKey]; ok {
 		if ts, ok := ti.(string); ok {
@@ -133,32 +148,59 @@ func getTime(m map[string]interface{}) time.Time {
 	return time.Now()
 }
 
-func getFormat(indexFormat string) (format string, attrs []string) {
+func getFormat(indexFormat string) (format string, attrs []string, timePos int) {
 	var state = stateNormal
 	var builder strings.Builder
 	var keyBuf strings.Builder
+	timePos = -1
+	writeHolder := func() {
+		if keyBuf.Len() > 0 {
+			attrs = append(attrs, keyBuf.String())
+			keyBuf.Reset()
+			builder.WriteString("%s")
+		}
+	}
+
 	for _, ch := range indexFormat {
-		switch ch {
-		case '{':
-			state = stateWrap
-		case '.':
-			if state == stateWrap {
-				state = stateDot
-			} else {
+		switch state {
+		case stateNormal:
+			switch ch {
+			case leftBrace:
+				state = stateWrap
+			default:
 				builder.WriteRune(ch)
 			}
-		case '}':
-			state = stateNormal
-			if keyBuf.Len() > 0 {
-				attrs = append(attrs, keyBuf.String())
-				builder.WriteString("%s")
+		case stateWrap:
+			switch ch {
+			case leftBrace:
+				state = stateVar
+			case dot:
+				state = stateDot
+				keyBuf.Reset()
+			case rightBrace:
+				state = stateNormal
+				timePos = len(attrs)
+				writeHolder()
+			default:
+				keyBuf.WriteRune(ch)
+			}
+		case stateVar:
+			switch ch {
+			case rightBrace:
+				state = stateWrap
+			default:
+				keyBuf.WriteRune(ch)
+			}
+		case stateDot:
+			switch ch {
+			case rightBrace:
+				state = stateNormal
+				writeHolder()
+			default:
+				keyBuf.WriteRune(ch)
 			}
 		default:
-			if state == stateDot {
-				keyBuf.WriteRune(ch)
-			} else {
-				builder.WriteRune(ch)
-			}
+			builder.WriteRune(ch)
 		}
 	}
 
