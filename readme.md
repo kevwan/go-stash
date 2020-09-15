@@ -49,10 +49,9 @@ Processors:
         - index
         - beat
         - docker_container
-        - offset
-        - prospector
-        - source
-        - stream
+    - Action: transfer
+      Field: message
+      Target: data
   Output:
     ElasticSearch:
       Hosts:

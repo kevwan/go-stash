@@ -24,9 +24,11 @@ type (
 	}
 
 	Filter struct {
-		Action     string      `json:",options=drop|remove_field"`
+		Action     string      `json:",options=drop|remove_field|transfer"`
 		Conditions []Condition `json:",optional"`
 		Fields     []string    `json:",optional"`
+		Field      string      `json:",optional"`
+		Target     string      `json:",optional"`
 	}
 
 	Processor struct {

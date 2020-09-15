@@ -5,6 +5,7 @@ import "github.com/tal-tech/go-stash/stash/config"
 const (
 	filterDrop         = "drop"
 	filterRemoveFields = "remove_field"
+	filterTransfer     = "transfer"
 	opAnd              = "and"
 	opOr               = "or"
 	typeContains       = "contains"
@@ -22,6 +23,8 @@ func CreateFilters(p config.Processor) []FilterFunc {
 			filters = append(filters, DropFilter(f.Conditions))
 		case filterRemoveFields:
 			filters = append(filters, RemoveFieldFilter(f.Fields))
+		case filterTransfer:
+			filters = append(filters, TransferFilter(f.Field, f.Target))
 		}
 	}
 
