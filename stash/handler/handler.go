@@ -26,7 +26,7 @@ func (mh *MessageHandler) AddFilters(filters ...filter.FilterFunc) {
 }
 
 func (mh *MessageHandler) Consume(_, val string) error {
-	m := make(map[string]interface{})
+	var m map[string]interface{}
 	if err := jsoniter.Unmarshal([]byte(val), &m); err != nil {
 		return err
 	}
