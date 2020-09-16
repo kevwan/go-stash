@@ -10,6 +10,6 @@ require (
 	github.com/olivere/elastic v6.2.34+incompatible
 	github.com/stretchr/testify v1.5.1
 	github.com/tal-tech/go-queue v1.0.1
-	github.com/tal-tech/go-zero v1.0.13
+	github.com/tal-tech/go-zero v1.0.14
 	github.com/vjeantet/jodaTime v1.0.0
 )

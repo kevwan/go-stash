@@ -19,7 +19,7 @@ type (
 		Index         string
 		DocType       string `json:",default=doc"`
 		TimeZone      string `json:",optional"`
-		MaxChunkBytes int    `json:",default=1048576"`
+		MaxChunkBytes int    `json:",default=15728640"` // default 15M
 		Compress      bool   `json:",default=false"`
 	}
 

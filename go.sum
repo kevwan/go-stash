@@ -233,6 +233,8 @@ github.com/tal-tech/go-zero v1.0.12 h1:ymdKjhNOBaO5Ddqa/XVo4qRwMNsB3LOKWj6UdFJN5
 github.com/tal-tech/go-zero v1.0.12/go.mod h1:y2wBHTkxNJw79K9/wCSeDKzv2pCT6x45oOmXEsJdQK8=
 github.com/tal-tech/go-zero v1.0.13 h1:lCVV29Q+k2Wn2Mvebm1HMPZyvLt3OYxo8b9U2W+SRtg=
 github.com/tal-tech/go-zero v1.0.13/go.mod h1:y2wBHTkxNJw79K9/wCSeDKzv2pCT6x45oOmXEsJdQK8=
+github.com/tal-tech/go-zero v1.0.14 h1:a8vH2pMCEt+sackLDZEIYL/u7DhRY7SBbN04ATgzUdI=
+github.com/tal-tech/go-zero v1.0.14/go.mod h1:y2wBHTkxNJw79K9/wCSeDKzv2pCT6x45oOmXEsJdQK8=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20171017195756-830351dc03c6/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=

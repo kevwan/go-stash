@@ -23,7 +23,7 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-	proc.SetTimeoutToForceQuit(c.GracePeriod)
+	proc.SetTimeToForceQuit(c.GracePeriod)
 
 	group := service.NewServiceGroup()
 	defer group.Stop()
