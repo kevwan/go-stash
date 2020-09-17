@@ -18,6 +18,27 @@ import (
 
 var configFile = flag.String("f", "etc/config.yaml", "Specify the config file")
 
+func toKqConf(c config.KafkaConf) []kq.KqConf {
+	var ret []kq.KqConf
+
+	for _, topic := range c.Topics {
+		ret = append(ret, kq.KqConf{
+			ServiceConf:  c.ServiceConf,
+			Brokers:      c.Brokers,
+			Group:        c.Group,
+			Topic:        topic,
+			Offset:       c.Offset,
+			NumConns:     c.NumConns,
+			NumProducers: c.NumProducers,
+			NumConsumers: c.NumConsumers,
+			MinBytes:     c.MinBytes,
+			MaxBytes:     c.MaxBytes,
+		})
+	}
+
+	return ret
+}
+
 func main() {
 	flag.Parse()
 
@@ -50,7 +71,9 @@ func main() {
 		handle := handler.NewHandler(writer, indexer)
 		handle.AddFilters(filters...)
 		handle.AddFilters(filter.AddUriFieldFilter("url", "uri"))
-		group.Add(kq.MustNewQueue(processor.Input.Kafka, handle))
+		for _, k := range toKqConf(processor.Input.Kafka) {
+			group.Add(kq.MustNewQueue(k, handle))
+		}
 	}
 
 	group.Start()

@@ -3,7 +3,7 @@ package config
 import (
 	"time"
 
-	"github.com/tal-tech/go-queue/kq"
+	"github.com/tal-tech/go-zero/core/service"
 )
 
 type (
@@ -31,9 +31,22 @@ type (
 		Target     string      `json:",optional"`
 	}
 
+	KafkaConf struct {
+		service.ServiceConf
+		Brokers      []string
+		Group        string
+		Topics       []string
+		Offset       string `json:",options=first|last,default=last"`
+		NumConns     int    `json:",default=1"`
+		NumProducers int    `json:",default=8"`
+		NumConsumers int    `json:",default=8"`
+		MinBytes     int    `json:",default=10240"`    // 10K
+		MaxBytes     int    `json:",default=10485760"` // 10M
+	}
+
 	Processor struct {
 		Input struct {
-			Kafka kq.KqConf
+			Kafka KafkaConf
 		}
 		Filters []Filter `json:",optional"`
 		Output  struct {

@@ -5,7 +5,8 @@ Processors:
       Brokers:
         - ":172.16.186.16:19092"
         - "172.16.186.17:19092"
-      Topic: k8slog
+      Topics:
+        - k8slog
       Group: pro
       NumProducers: 16
   Filters:
