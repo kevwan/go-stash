@@ -23,16 +23,16 @@ func toKqConf(c config.KafkaConf) []kq.KqConf {
 
 	for _, topic := range c.Topics {
 		ret = append(ret, kq.KqConf{
-			ServiceConf:  c.ServiceConf,
-			Brokers:      c.Brokers,
-			Group:        c.Group,
-			Topic:        topic,
-			Offset:       c.Offset,
-			NumConns:     c.NumConns,
-			NumProducers: c.NumProducers,
-			NumConsumers: c.NumConsumers,
-			MinBytes:     c.MinBytes,
-			MaxBytes:     c.MaxBytes,
+			ServiceConf: c.ServiceConf,
+			Brokers:     c.Brokers,
+			Group:       c.Group,
+			Topic:       topic,
+			Offset:      c.Offset,
+			Conns:       c.Conns,
+			Consumers:   c.Consumers,
+			Processors:  c.Processors,
+			MinBytes:    c.MinBytes,
+			MaxBytes:    c.MaxBytes,
 		})
 	}
 
@@ -49,7 +49,7 @@ func main() {
 	group := service.NewServiceGroup()
 	defer group.Stop()
 
-	for _, processor := range c.Processors {
+	for _, processor := range c.Clusters {
 		client, err := elastic.NewClient(
 			elastic.SetSniff(false),
 			elastic.SetURL(processor.Output.ElasticSearch.Hosts...),

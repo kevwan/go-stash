@@ -40,6 +40,7 @@ github.com/dsymonds/gotoc v0.0.0-20160928043926-5aebcfc91819/go.mod h1:MvzMVHq8B
 github.com/dustin/go-humanize v0.0.0-20171111073723-bb3d318650d4/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
 github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21 h1:YEetp8/yCZMuEPMUDHG0CW/brkkEp8mzqk2+ODEitlw=
 github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21/go.mod h1:+020luEh2TKB4/GOp8oxxtq0Daoen/Cii55CzbTV6DU=
+github.com/emicklei/proto v1.9.0/go.mod h1:rn1FgRS/FANiZdD2djyH7TMA9jdRDcYQ9IEN9yvjX0A=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
@@ -229,6 +230,8 @@ github.com/tal-tech/go-queue v1.0.0 h1:FRRHuWbSUwyfXpQgK4rNa+9iJT0jN6+WBj5OjZWst
 github.com/tal-tech/go-queue v1.0.0/go.mod h1:vffND44z/ta5szc5rD0cEAK7qphrgT2rrTxghQ1JWDE=
 github.com/tal-tech/go-queue v1.0.1 h1:TSWauhHGxOX1lAQ5p2xQn86eI1GtamiP0kAIQAiS8DY=
 github.com/tal-tech/go-queue v1.0.1/go.mod h1:V3cpvoQDKfVpPDvCiPDAZTdR/6RYuFhNGhJeXl4ak9w=
+github.com/tal-tech/go-queue v1.0.2 h1:A9V321RMHNITfRvmIvKrBAK3BfoykDNooAttk7pUg1o=
+github.com/tal-tech/go-queue v1.0.2/go.mod h1:gQK4Eg8pqel8Z9r1hjlSXbJFavLeJQVyTSwBKeAnpm8=
 github.com/tal-tech/go-zero v1.0.8 h1:Wca6UVi5+Pr1GOFCpvcB178EzlecLlKEgGb3v8Ln1dQ=
 github.com/tal-tech/go-zero v1.0.8/go.mod h1:/e0i8rMFzFO6Lha+UG9/nkzLSvv5dyYCCN+TFP1JcB0=
 github.com/tal-tech/go-zero v1.0.12 h1:ymdKjhNOBaO5Ddqa/XVo4qRwMNsB3LOKWj6UdFJN5rc=
@@ -239,6 +242,8 @@ github.com/tal-tech/go-zero v1.0.14 h1:a8vH2pMCEt+sackLDZEIYL/u7DhRY7SBbN04ATgzU
 github.com/tal-tech/go-zero v1.0.14/go.mod h1:y2wBHTkxNJw79K9/wCSeDKzv2pCT6x45oOmXEsJdQK8=
 github.com/tal-tech/go-zero v1.0.20 h1:BluZPak0minwoNqhSvtlBuwjDK3Q7Vgke8YSQJS2S+w=
 github.com/tal-tech/go-zero v1.0.20/go.mod h1:NgINotJQNboHp9OrqhNzgmk8WbklEkx13tvT4MSPVe4=
+github.com/tal-tech/go-zero v1.0.21 h1:IB0c6zmkhUERcagSLPrlVT4oA74yE+l2w2K1ujW0sY8=
+github.com/tal-tech/go-zero v1.0.21/go.mod h1:llP5PQjnATfnzZo/lo5unjR41njzoL3lkGO/KXbnisw=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20171017195756-830351dc03c6/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=

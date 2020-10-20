@@ -14,7 +14,7 @@ const (
 
 type FilterFunc func(map[string]interface{}) map[string]interface{}
 
-func CreateFilters(p config.Processor) []FilterFunc {
+func CreateFilters(p config.Cluster) []FilterFunc {
 	var filters []FilterFunc
 
 	for _, f := range p.Filters {

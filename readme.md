@@ -17,7 +17,7 @@ gostash -f etc/config.yaml
 config.yaml example as below:
 
 ```yaml
-Processors:
+Clusters:
 - Input:
     Kafka:
       Name: gostash
@@ -27,7 +27,7 @@ Processors:
       Topics:
         - k8slog
       Group: pro
-      NumProducers: 16
+      Consumers: 16
   Filters:
     - Action: drop
       Conditions:
