@@ -224,8 +224,12 @@ github.com/stretchr/testify v1.5.1 h1:nOGnQDM7FYENwehXlg/kFVnos3rEvtKTjRvOWSzb6H
 github.com/stretchr/testify v1.5.1/go.mod h1:5W2xD1RspED5o8YsWQXVCued0rvSQ+mT+I5cxcmMvtA=
 github.com/tal-tech/go-queue v1.0.2 h1:A9V321RMHNITfRvmIvKrBAK3BfoykDNooAttk7pUg1o=
 github.com/tal-tech/go-queue v1.0.2/go.mod h1:gQK4Eg8pqel8Z9r1hjlSXbJFavLeJQVyTSwBKeAnpm8=
+github.com/tal-tech/go-queue v1.0.3 h1:fpBZjTkb0tN+2KW0PS3atydoiIdBeiQZHCxy5juPUq4=
+github.com/tal-tech/go-queue v1.0.3/go.mod h1:gQK4Eg8pqel8Z9r1hjlSXbJFavLeJQVyTSwBKeAnpm8=
 github.com/tal-tech/go-zero v1.0.21 h1:IB0c6zmkhUERcagSLPrlVT4oA74yE+l2w2K1ujW0sY8=
 github.com/tal-tech/go-zero v1.0.21/go.mod h1:llP5PQjnATfnzZo/lo5unjR41njzoL3lkGO/KXbnisw=
+github.com/tal-tech/go-zero v1.0.22 h1:Q+yeLPta9zqWIzHAI7CKNnazigGP8s9Y3X/KMOhWXAQ=
+github.com/tal-tech/go-zero v1.0.22/go.mod h1:llP5PQjnATfnzZo/lo5unjR41njzoL3lkGO/KXbnisw=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20171017195756-830351dc03c6/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=
