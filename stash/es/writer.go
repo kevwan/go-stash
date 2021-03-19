@@ -55,21 +55,23 @@ func (w *Writer) execute(vals []interface{}) {
 		bulk.Add(req)
 	}
 	resp, err := bulk.Do(context.Background())
-
 	if err != nil {
 		logx.Error(err)
 		return
 	}
 
 	// bulk error in docs will report in response items
-	if resp.Errors {
-		for _, imap := range resp.Items {
-			for _, item := range imap {
-				if item.Error == nil {
-					continue
-				}
-				logx.Error(item.Error)
+	if !resp.Errors {
+		return
+	}
+
+	for _, imap := range resp.Items {
+		for _, item := range imap {
+			if item.Error == nil {
+				continue
 			}
+
+			logx.Error(item.Error)
 		}
 	}
 }
