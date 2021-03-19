@@ -54,8 +54,22 @@ func (w *Writer) execute(vals []interface{}) {
 		req := elastic.NewBulkIndexRequest().Index(pair.index).Type(w.docType).Doc(pair.val)
 		bulk.Add(req)
 	}
-	_, err := bulk.Do(context.Background())
+	resp, err := bulk.Do(context.Background())
+
 	if err != nil {
 		logx.Error(err)
+		return
+	}
+
+	// bulk error in docs will report in response items
+	if resp.Errors {
+		for _, imap := range resp.Items {
+			for _, item := range imap {
+				if item.Error == nil {
+					continue
+				}
+				logx.Error(item.Error)
+			}
+		}
 	}
 }
