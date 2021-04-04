@@ -93,7 +93,7 @@ func (idx *Index) ensureIndex(index string) error {
 		}
 
 		createService := idx.client.CreateIndex(index)
-		if err := fx.DoWithRetries(func() error {
+		if err := fx.DoWithRetry(func() error {
 			// is it necessary to check the result?
 			_, err := createService.Do(context.Background())
 			return err
