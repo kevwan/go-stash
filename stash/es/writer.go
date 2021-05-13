@@ -3,7 +3,7 @@ package es
 import (
 	"context"
 
-	"github.com/olivere/elastic"
+	"github.com/olivere/elastic/v7"
 	"github.com/tal-tech/go-stash/stash/config"
 	"github.com/tal-tech/go-zero/core/executors"
 	"github.com/tal-tech/go-zero/core/logx"

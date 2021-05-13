@@ -4,7 +4,7 @@ import (
 	"flag"
 	"time"
 
-	"github.com/olivere/elastic"
+	"github.com/olivere/elastic/v7"
 	"github.com/tal-tech/go-queue/kq"
 	"github.com/tal-tech/go-stash/stash/config"
 	"github.com/tal-tech/go-stash/stash/es"
