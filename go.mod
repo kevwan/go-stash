@@ -17,7 +17,7 @@ require (
 	github.com/segmentio/kafka-go v0.4.17 // indirect
 	github.com/stretchr/testify v1.7.0
 	github.com/tal-tech/go-queue v1.0.6
-	github.com/tal-tech/go-zero v1.1.10
+	github.com/tal-tech/go-zero v1.2.1
 	github.com/vjeantet/jodaTime v1.0.0
 	github.com/xdg/scram v1.0.3 // indirect
 	github.com/xdg/stringprep v1.0.3 // indirect
