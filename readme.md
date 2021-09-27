@@ -211,5 +211,5 @@ Offset: first
 go-stash is built on top the following features of [**go-zero**](https://github.com/zeromicro/go-zero) ![GitHub Repo stars](https://img.shields.io/github/stars/tal-tech/go-zero?style=social) ![GitHub forks](https://img.shields.io/github/forks/tal-tech/go-zero?style=social) for great performance!
 
 * mapreduce framework
-* chunk executors
-* concurrent tasks
+* chunk executor
+* concurrent task management
