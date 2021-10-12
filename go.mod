@@ -1,4 +1,4 @@
-module github.com/tal-tech/go-stash
+module github.com/kevwan/go-stash
 
 go 1.13
 

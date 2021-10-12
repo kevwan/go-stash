@@ -2,8 +2,8 @@ package handler
 
 import (
 	jsoniter "github.com/json-iterator/go"
-	"github.com/tal-tech/go-stash/stash/es"
-	"github.com/tal-tech/go-stash/stash/filter"
+	"github.com/kevwan/go-stash/stash/es"
+	"github.com/kevwan/go-stash/stash/filter"
 )
 
 type MessageHandler struct {
