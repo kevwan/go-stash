@@ -6,7 +6,7 @@ go-stash是一个高效的从Kafka获取，根据配置的规则进行处理，�
 
 go-stash有大概logstash 5倍的吞吐性能，并且部署简单，一个可执行文件即可。
 
-![go-stash](https://pro-public.xiaoheiban.cn/icon/84cc2f235035d7f1da6df512d4ba97b7.png)
+![go-stash](doc/flow.png)
 
 
 ### 安装
