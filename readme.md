@@ -6,7 +6,7 @@ go-stash is a high performance, free and open source server-side data processing
 
 go-stash is about 5x throughput more than logstash, and easy to deploy, only one executable file.
 
-![go-stash](doc/flow.png)
+<img src="doc/flow.png" width="80%" align="left">
 
 ## Quick Start
 
