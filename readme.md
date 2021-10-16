@@ -213,3 +213,7 @@ go-stash is built on top the following features of [**go-zero**](https://github.
 * mapreduce framework
 * chunk executor
 * concurrent task management
+
+## Give a Star! ⭐
+
+If you like or are using this project to learn or start your solution, please give it a star. Thanks!
