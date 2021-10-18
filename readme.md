@@ -208,11 +208,7 @@ Offset: first
 
 ## Acknowledgements
 
-go-stash is built on top the following features of [**go-zero**](https://github.com/zeromicro/go-zero) ![GitHub Repo stars](https://img.shields.io/github/stars/tal-tech/go-zero?style=social) ![GitHub forks](https://img.shields.io/github/forks/tal-tech/go-zero?style=social) for great performance!
-
-* mapreduce framework
-* chunk executor
-* concurrent task management
+go-stash is powered by [**go-zero**](https://github.com/zeromicro/go-zero) ![GitHub Repo stars](https://img.shields.io/github/stars/tal-tech/go-zero?style=social) ![GitHub forks](https://img.shields.io/github/forks/tal-tech/go-zero?style=social) for great performance!
 
 ## Give a Star! ⭐
 
