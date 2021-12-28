@@ -17,8 +17,16 @@ cd stash && go build stash.go
 
 ### Quick Start
 
+- 可执行文件方式
+
 ```shell
 ./stash -f etc/config.yaml
+```
+
+- docker 方式，确保配置文件路径正确
+
+```shell
+docker run -d -v `pwd`/etc:/app/etc kevinwan/go-stash
 ```
 
 config.yaml示例如下:

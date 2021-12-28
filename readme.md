@@ -18,8 +18,16 @@ cd stash && go build stash.go
 
 ### Quick Start
 
+- With binary
+
 ```shell
-. /stash -f etc/config.yaml
+./stash -f etc/config.yaml
+```
+
+- With docker, make sure the path of config file is correct.
+
+```shell
+docker run -d -v `pwd`/etc:/app/etc kevinwan/go-stash
 ```
 
 The config.yaml example is as follows:
