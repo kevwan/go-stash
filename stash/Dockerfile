@@ -13,7 +13,7 @@ ADD go.sum .
 RUN go mod download
 COPY . .
 COPY stash/etc /app/etc
-RUN go build -ldflags="-s -w" -o /app/stash stash/stash.go
+RUN GOARCH=amd64 go build -ldflags="-s -w" -o /app/stash stash/stash.go
 RUN apk update --no-cache && apk add upx && upx /app/stash
 
 

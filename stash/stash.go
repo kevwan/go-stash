@@ -9,11 +9,11 @@ import (
 	"github.com/kevwan/go-stash/stash/filter"
 	"github.com/kevwan/go-stash/stash/handler"
 	"github.com/olivere/elastic/v7"
-	"github.com/tal-tech/go-queue/kq"
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/core/logx"
 	"github.com/tal-tech/go-zero/core/proc"
 	"github.com/tal-tech/go-zero/core/service"
+	"github.com/zeromicro/go-queue/kq"
 )
 
 var configFile = flag.String("f", "etc/config.yaml", "Specify the config file")
