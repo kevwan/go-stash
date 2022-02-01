@@ -8,11 +8,11 @@ import (
 	"time"
 
 	"github.com/olivere/elastic/v7"
-	"github.com/tal-tech/go-zero/core/fx"
-	"github.com/tal-tech/go-zero/core/lang"
-	"github.com/tal-tech/go-zero/core/logx"
-	"github.com/tal-tech/go-zero/core/syncx"
 	"github.com/vjeantet/jodaTime"
+	"github.com/zeromicro/go-zero/core/fx"
+	"github.com/zeromicro/go-zero/core/lang"
+	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/syncx"
 )
 
 const (
@@ -35,20 +35,20 @@ type (
 	IndexFunc   func() string
 
 	Index struct {
-		client      *elastic.Client
-		indexFormat IndexFormat
-		indices     map[string]lang.PlaceholderType
-		lock        sync.RWMutex
-		sharedCalls syncx.SharedCalls
+		client       *elastic.Client
+		indexFormat  IndexFormat
+		indices      map[string]lang.PlaceholderType
+		lock         sync.RWMutex
+		singleFlight syncx.SingleFlight
 	}
 )
 
 func NewIndex(client *elastic.Client, indexFormat string, loc *time.Location) *Index {
 	return &Index{
-		client:      client,
-		indexFormat: buildIndexFormatter(indexFormat, loc),
-		indices:     make(map[string]lang.PlaceholderType),
-		sharedCalls: syncx.NewSharedCalls(),
+		client:       client,
+		indexFormat:  buildIndexFormatter(indexFormat, loc),
+		indices:      make(map[string]lang.PlaceholderType),
+		singleFlight: syncx.NewSingleFlight(),
 	}
 }
 
@@ -68,7 +68,7 @@ func (idx *Index) GetIndex(m map[string]interface{}) string {
 }
 
 func (idx *Index) ensureIndex(index string) error {
-	_, err := idx.sharedCalls.Do(index, func() (i interface{}, err error) {
+	_, err := idx.singleFlight.Do(index, func() (i interface{}, err error) {
 		idx.lock.Lock()
 		defer idx.lock.Unlock()
 

@@ -216,7 +216,7 @@ Offset: first
 
 ## Acknowledgements
 
-go-stash is powered by [**go-zero**](https://github.com/zeromicro/go-zero) ![GitHub Repo stars](https://img.shields.io/github/stars/tal-tech/go-zero?style=social) ![GitHub forks](https://img.shields.io/github/forks/tal-tech/go-zero?style=social) for great performance!
+go-stash is powered by [**go-zero**](https://github.com/zeromicro/go-zero) ![GitHub Repo stars](https://img.shields.io/github/stars/zeromicro/go-zero?style=social) ![GitHub forks](https://img.shields.io/github/forks/zeromicro/go-zero?style=social) for great performance!
 
 ## Give a Star! ⭐
 

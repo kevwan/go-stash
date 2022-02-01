@@ -5,8 +5,8 @@ import (
 
 	"github.com/kevwan/go-stash/stash/config"
 	"github.com/olivere/elastic/v7"
-	"github.com/tal-tech/go-zero/core/executors"
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/executors"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type (
