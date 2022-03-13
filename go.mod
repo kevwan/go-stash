@@ -8,8 +8,8 @@ require (
 	github.com/olivere/elastic/v7 v7.0.28
 	github.com/stretchr/testify v1.7.0
 	github.com/vjeantet/jodaTime v1.0.0
-	github.com/zeromicro/go-queue v1.1.2
-	github.com/zeromicro/go-zero v1.3.0
+	github.com/zeromicro/go-queue v1.1.3
+	github.com/zeromicro/go-zero v1.3.1
 )
 
 require (
@@ -46,8 +46,8 @@ require (
 	go.opentelemetry.io/otel/sdk v1.3.0 // indirect
 	go.opentelemetry.io/otel/trace v1.3.0 // indirect
 	go.uber.org/automaxprocs v1.4.0 // indirect
-	golang.org/x/sys v0.0.0-20220111092808-5a964db01320 // indirect
-	google.golang.org/grpc v1.43.0 // indirect
+	golang.org/x/sys v0.0.0-20220227234510-4e6760a101f9 // indirect
+	google.golang.org/grpc v1.44.0 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
