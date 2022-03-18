@@ -27,6 +27,7 @@ func NewWriter(c config.ElasticSearchConf) (*Writer, error) {
 		elastic.SetSniff(false),
 		elastic.SetURL(c.Hosts...),
 		elastic.SetGzip(c.Compress),
+		elastic.SetBasicAuth(c.Username,c.Password),
 	)
 	if err != nil {
 		return nil, err
