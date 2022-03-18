@@ -53,6 +53,7 @@ func main() {
 		client, err := elastic.NewClient(
 			elastic.SetSniff(false),
 			elastic.SetURL(processor.Output.ElasticSearch.Hosts...),
+			elastic.SetBasicAuth(processor.Output.ElasticSearch.Username,processor.Output.ElasticSearch.Password),
 		)
 		logx.Must(err)
 
