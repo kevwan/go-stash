@@ -3,7 +3,7 @@ Clusters:
     Kafka:
       Name: gostash
       Brokers:
-        - ":172.16.186.16:19092"
+        - "172.16.186.16:19092"
         - "172.16.186.17:19092"
       Topics:
         - k8slog
@@ -41,6 +41,6 @@ Clusters:
   Output:
     ElasticSearch:
       Hosts:
-        - "172.16.141.4:9200"
-        - "172.16.141.5:9200"
+        - http://172.16.141.4:9200
+        - http://172.16.141.5:9200
       Index: "{.event}-{{yyyy-MM-dd}}"
