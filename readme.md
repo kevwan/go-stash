@@ -1,5 +1,7 @@
 English | [简体中文](readme-cn.md)
 
+<a href="https://www.buymeacoffee.com/kevwan"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=kevwan&button_colour=40DCA5&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+
 # go-stash
 
 go-stash is a high performance, free and open source server-side data processing pipeline that ingests data from Kafka, processes it, and then sends it to ElasticSearch. 
