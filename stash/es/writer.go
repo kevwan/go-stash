@@ -52,7 +52,11 @@ func (w *Writer) execute(vals []interface{}) {
 	var bulk = w.client.Bulk()
 	for _, val := range vals {
 		pair := val.(valueWithIndex)
-		req := elastic.NewBulkIndexRequest().Index(pair.index).Type(w.docType).Doc(pair.val)
+		req := elastic.NewBulkIndexRequest().Index(pair.index)
+		if len(w.docType) > 0 {
+		    req = req.Type(w.docType)
+		}
+		req = req.Doc(pair.val)
 		bulk.Add(req)
 	}
 	resp, err := bulk.Do(context.Background())
