@@ -1,9 +1,8 @@
 package filter
 
 import (
+	"encoding/hex"
 	"strings"
-
-	"github.com/globalsign/mgo/bson"
 )
 
 func AddUriFieldFilter(inField, outFirld string) FilterFunc {
@@ -18,7 +17,7 @@ func AddUriFieldFilter(inField, outFirld string) FilterFunc {
 			}
 
 			for i, data := range datas {
-				if bson.IsObjectIdHex(data) {
+				if IsObjectIdHex(data) {
 					datas[i] = "*"
 				}
 			}
@@ -28,4 +27,15 @@ func AddUriFieldFilter(inField, outFirld string) FilterFunc {
 
 		return m
 	}
+}
+
+// IsObjectIdHex returns whether s is a valid hex representation of
+// an ObjectId. See the ObjectIdHex function.
+func IsObjectIdHex(s string) bool {
+	if len(s) != 24 {
+		return false
+	}
+
+	_, err := hex.DecodeString(s)
+	return err == nil
 }
