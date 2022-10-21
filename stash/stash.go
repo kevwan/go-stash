@@ -33,6 +33,8 @@ func toKqConf(c config.KafkaConf) []kq.KqConf {
 			Processors:  c.Processors,
 			MinBytes:    c.MinBytes,
 			MaxBytes:    c.MaxBytes,
+			Username:    c.Username,
+			Password:    c.Password,
 		})
 	}
 
@@ -53,7 +55,7 @@ func main() {
 		client, err := elastic.NewClient(
 			elastic.SetSniff(false),
 			elastic.SetURL(processor.Output.ElasticSearch.Hosts...),
-			elastic.SetBasicAuth(processor.Output.ElasticSearch.Username,processor.Output.ElasticSearch.Password),
+			elastic.SetBasicAuth(processor.Output.ElasticSearch.Username, processor.Output.ElasticSearch.Password),
 		)
 		logx.Must(err)
 
