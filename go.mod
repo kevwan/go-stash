@@ -7,7 +7,7 @@ require (
 	github.com/olivere/elastic/v7 v7.0.32
 	github.com/stretchr/testify v1.8.1
 	github.com/vjeantet/jodaTime v1.0.0
-	github.com/zeromicro/go-queue v1.1.7
+	github.com/zeromicro/go-queue v1.1.8
 	github.com/zeromicro/go-zero v1.4.3
 )
 
@@ -24,7 +24,7 @@ require (
 	github.com/google/pprof v0.0.0-20211214055906-6f57359322fd // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.7.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
-	github.com/klauspost/compress v1.15.7 // indirect
+	github.com/klauspost/compress v1.15.9 // indirect
 	github.com/kr/pretty v0.3.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.9 // indirect
@@ -42,7 +42,7 @@ require (
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
-	github.com/segmentio/kafka-go v0.4.35 // indirect
+	github.com/segmentio/kafka-go v0.4.38 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.11.0 // indirect
 	go.opentelemetry.io/otel/exporters/jaeger v1.11.0 // indirect
