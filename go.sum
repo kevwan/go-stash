@@ -386,6 +386,7 @@ github.com/alecthomas/units v0.0.0-20190717042225-c3de453c63f4/go.mod h1:ybxpYRF
 github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d/go.mod h1:rBZYJk541a8SKzHPHnH3zbiI+7dagKZ0cgpgrD7Fyho=
 github.com/alicebob/gopher-json v0.0.0-20200520072559-a9ecdc9d1d3a/go.mod h1:SGnFV6hVsYE877CKEZ6tDNTjaSXYUk6QqoIK6PrAtcc=
 github.com/alicebob/miniredis/v2 v2.23.1/go.mod h1:84TWKZlxYkfgMucPBf5SOQBYJceZeQRFIaQgNMiCX6Q=
+github.com/alicebob/miniredis/v2 v2.30.0/go.mod h1:84TWKZlxYkfgMucPBf5SOQBYJceZeQRFIaQgNMiCX6Q=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a/go.mod h1:lB+ZfQJz7igIIfQNfa7Ml4HSf2uFQQRzpGGRXenZAgY=
 github.com/aws/aws-sdk-go v1.43.21/go.mod h1:y4AeaBuwd2Lk+GepC1E9v0qOiTws0MIWAX4oIKwKHZo=
@@ -624,6 +625,7 @@ github.com/jhump/goprotoc v0.5.0/go.mod h1:VrbvcYrQOrTi3i0Vf+m+oqQWk9l72mjkJCYo7
 github.com/jhump/protoreflect v1.11.0/go.mod h1:U7aMIjN0NWq9swDP7xDdoMfRHb35uiuTd3Z9nFXJf5E=
 github.com/jhump/protoreflect v1.12.0/go.mod h1:JytZfP5d0r8pVNLZvai7U/MCuTWITgrI4tTg7puQFKI=
 github.com/jhump/protoreflect v1.14.0/go.mod h1:JytZfP5d0r8pVNLZvai7U/MCuTWITgrI4tTg7puQFKI=
+github.com/jhump/protoreflect v1.14.1/go.mod h1:JytZfP5d0r8pVNLZvai7U/MCuTWITgrI4tTg7puQFKI=
 github.com/jmespath/go-jmespath v0.4.0/go.mod h1:T8mJZnbsbmF+m6zOOFylbeCJqk5+pHWvzYPziyZiYoo=
 github.com/jmespath/go-jmespath/internal/testify v1.5.1/go.mod h1:L3OGu8Wl2/fWfCI6z80xFu9LTZmf1ZRjMHUOPmWr69U=
 github.com/jmoiron/sqlx v1.2.0/go.mod h1:1FEQNm3xlJgrMD+FBdI9+xvCksHtbpVBBw5dYhBSsks=
@@ -829,8 +831,9 @@ github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5t
 github.com/yuin/gopher-lua v0.0.0-20220504180219-658193537a64/go.mod h1:GBR0iDaNXjAgGg9zfCvksxSRnQx76gclCIb7kdAd1Pw=
 github.com/zeromicro/go-queue v1.1.8 h1:DSzOYh6tSr0Flw9FqnaBX2fxR0T3vgEwVNItobLwQgE=
 github.com/zeromicro/go-queue v1.1.8/go.mod h1:sKF0fI9cKmqY/Y9Pr2aRnt3zllnPglBJ1yl4ByOEhiw=
-github.com/zeromicro/go-zero v1.4.3 h1:sTQ++6fxQHJnpGCN7h2CUrhWmbvhBqEgE75cJl635SM=
 github.com/zeromicro/go-zero v1.4.3/go.mod h1:UmDjuW7LHd9j7+nnnPBcXF0HLNmjJw6OjHPTlSp7X7Y=
+github.com/zeromicro/go-zero v1.4.4 h1:J8M768EVFNtIQJ/GCEsoIQPanxbx2HHT0it7r69U76Y=
+github.com/zeromicro/go-zero v1.4.4/go.mod h1:5WSUwtJm0bYdDZ69GlckigcT6D0EyAPbDaX3unbSY/4=
 go.etcd.io/etcd/api/v3 v3.5.5/go.mod h1:KFtNaxGDw4Yx/BA4iPPwevUTAuqcsPxzyX8PHydchN8=
 go.etcd.io/etcd/client/pkg/v3 v3.5.5/go.mod h1:ggrwbk069qxpKPq8/FKkQ3Xq9y39kbFR4LnKszpRXeQ=
 go.etcd.io/etcd/client/v3 v3.5.5/go.mod h1:aApjR4WGlSumpnJ2kloS75h6aHUmAyaPLjHMxpc7E7c=
@@ -859,6 +862,8 @@ go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.11.0/go.mod h1:FnDp7XemjN3o
 go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.10.0/go.mod h1:OfUCyyIiDvNXHWpcWgbF+MWvqPZiNa3YDEnivcnYsV0=
 go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.11.0 h1:j2RFV0Qdt38XQ2Jvi4WIsQ56w8T7eSirYbMw19VXRDg=
 go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.11.0/go.mod h1:pILgiTEtrqvZpoiuGdblDgS5dbIaTgDrkIuKfEFkt+A=
+go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.10.0 h1:S8DedULB3gp93Rh+9Z+7NTEv+6Id/KYS7LDyipZ9iCE=
+go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.10.0/go.mod h1:5WV40MLWwvWlGP7Xm8g3pMcg0pKOUY609qxJn8y7LmM=
 go.opentelemetry.io/otel/exporters/zipkin v1.10.0/go.mod h1:HdfvgwcOoCB0+zzrTHycW6btjK0zNpkz2oTGO815SCI=
 go.opentelemetry.io/otel/exporters/zipkin v1.11.0 h1:v/Abo5REOWrCj4zcEIUHFZtXpsCVjrwZj28iyX2rHXE=
 go.opentelemetry.io/otel/exporters/zipkin v1.11.0/go.mod h1:unWnsLCMYfINP8ue0aXVrB/GYHoXNn/lbTnupvLekGQ=
