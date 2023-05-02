@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func AddUriFieldFilter(inField, outFirld string) FilterFunc {
+func AddUriFieldFilter(inField, outField string) FilterFunc {
 	return func(m map[string]interface{}) map[string]interface{} {
 		if val, ok := m[inField].(string); ok {
 			var datas []string
@@ -22,7 +22,7 @@ func AddUriFieldFilter(inField, outFirld string) FilterFunc {
 				}
 			}
 
-			m[outFirld] = strings.Join(datas, "/")
+			m[outField] = strings.Join(datas, "/")
 		}
 
 		return m
