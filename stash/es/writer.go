@@ -2,18 +2,23 @@ package es
 
 import (
 	"context"
-
 	"github.com/kevwan/go-stash/stash/config"
 	"github.com/olivere/elastic/v7"
+	"github.com/rogpeppe/go-internal/semver"
 	"github.com/zeromicro/go-zero/core/executors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+const (
+	es8Version = "8.0.0"
+)
+
 type (
 	Writer struct {
-		docType  string
-		client   *elastic.Client
-		inserter *executors.ChunkExecutor
+		docType   string
+		esVersion string
+		client    *elastic.Client
+		inserter  *executors.ChunkExecutor
 	}
 
 	valueWithIndex struct {
@@ -27,15 +32,19 @@ func NewWriter(c config.ElasticSearchConf) (*Writer, error) {
 		elastic.SetSniff(false),
 		elastic.SetURL(c.Hosts...),
 		elastic.SetGzip(c.Compress),
-		elastic.SetBasicAuth(c.Username,c.Password),
+		elastic.SetBasicAuth(c.Username, c.Password),
 	)
 	if err != nil {
 		return nil, err
 	}
-
+	version, err := client.ElasticsearchVersion(c.Hosts[0])
+	if err != nil {
+		return nil, err
+	}
 	writer := Writer{
-		docType: c.DocType,
-		client:  client,
+		docType:   c.DocType,
+		client:    client,
+		esVersion: version,
 	}
 	writer.inserter = executors.NewChunkExecutor(writer.execute, executors.WithChunkBytes(c.MaxChunkBytes))
 	return &writer, nil
@@ -53,9 +62,9 @@ func (w *Writer) execute(vals []interface{}) {
 	for _, val := range vals {
 		pair := val.(valueWithIndex)
 		req := elastic.NewBulkIndexRequest().Index(pair.index)
-		// if len(w.docType) > 0 {
-		//     req = req.Type(w.docType)
-		// }
+		if isSupportType(w.esVersion) && len(w.docType) > 0 {
+			req = req.Type(w.docType)
+		}
 		req = req.Doc(pair.val)
 		bulk.Add(req)
 	}
@@ -79,4 +88,9 @@ func (w *Writer) execute(vals []interface{}) {
 			logx.Error(item.Error)
 		}
 	}
+}
+
+func isSupportType(version string) bool {
+	//es8.x not support type field
+	return semver.Compare(version, es8Version) < 0
 }
