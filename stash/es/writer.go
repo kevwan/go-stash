@@ -2,6 +2,7 @@ package es
 
 import (
 	"context"
+
 	"github.com/kevwan/go-stash/stash/config"
 	"github.com/olivere/elastic/v7"
 	"github.com/rogpeppe/go-internal/semver"
@@ -9,9 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-const (
-	es8Version = "8.0.0"
-)
+const es8Version = "8.0.0"
 
 type (
 	Writer struct {
@@ -37,10 +36,12 @@ func NewWriter(c config.ElasticSearchConf) (*Writer, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	version, err := client.ElasticsearchVersion(c.Hosts[0])
 	if err != nil {
 		return nil, err
 	}
+
 	writer := Writer{
 		docType:   c.DocType,
 		client:    client,
@@ -91,6 +92,6 @@ func (w *Writer) execute(vals []interface{}) {
 }
 
 func isSupportType(version string) bool {
-	//es8.x not support type field
+	// es8.x not support type field
 	return semver.Compare(version, es8Version) < 0
 }
