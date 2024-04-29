@@ -112,7 +112,7 @@ Offset: first
   每次从kafka获取数据块的区间大小，默认为1M~10M，网络和IO较好的情况下，可以适当调高
 
 #### Offset
-  可选last和false，默认为last，表示从头从kafka开始读取数据
+  可选last和first，默认为last，表示从头从kafka开始读取数据
 
 
 ### Filters
