@@ -115,7 +115,7 @@ Offset: first
 * The default size of the data block from kafka is 1M~10M. If the network and IO are better, you can adjust it higher.
 
 #### Offset
-* Optional last and false, the default is last, which means read data from kafka from the beginning
+* Optional last and first, the default is last, which means read data from kafka from the beginning
 
 
 ### Filters
