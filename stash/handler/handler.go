@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"context"
+
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kevwan/go-stash/stash/es"
 	"github.com/kevwan/go-stash/stash/filter"
@@ -25,7 +27,7 @@ func (mh *MessageHandler) AddFilters(filters ...filter.FilterFunc) {
 	}
 }
 
-func (mh *MessageHandler) Consume(_, val string) error {
+func (mh *MessageHandler) Consume(_ context.Context, _, val string) error {
 	var m map[string]interface{}
 	if err := jsoniter.Unmarshal([]byte(val), &m); err != nil {
 		return err
