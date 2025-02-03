@@ -2,6 +2,7 @@ package es
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/kevwan/go-stash/stash/config"
 	"github.com/olivere/elastic/v7"
@@ -10,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-const es8Version = "8.0.0"
+const es8Version = "v8.0.0"
 
 type (
 	Writer struct {
@@ -22,7 +23,7 @@ type (
 
 	valueWithIndex struct {
 		index string
-		val   string
+		val   map[string]interface{}
 	}
 )
 
@@ -45,13 +46,13 @@ func NewWriter(c config.ElasticSearchConf) (*Writer, error) {
 	writer := Writer{
 		docType:   c.DocType,
 		client:    client,
-		esVersion: version,
+		esVersion: fmt.Sprintf("v%s", version),
 	}
 	writer.inserter = executors.NewChunkExecutor(writer.execute, executors.WithChunkBytes(c.MaxChunkBytes))
 	return &writer, nil
 }
 
-func (w *Writer) Write(index, val string) error {
+func (w *Writer) Write(index string, val map[string]interface{}) error {
 	return w.inserter.Add(valueWithIndex{
 		index: index,
 		val:   val,
