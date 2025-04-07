@@ -1,7 +1,7 @@
 module github.com/kevwan/go-stash
 
 go 1.22
-toolchain go1.23.6
+toolchain go1.24.1
 
 require (
 	github.com/json-iterator/go v1.1.12
@@ -10,7 +10,7 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/vjeantet/jodaTime v1.0.0
 	github.com/zeromicro/go-queue v1.2.2
-	github.com/zeromicro/go-zero v1.8.1
+	github.com/zeromicro/go-zero v1.8.2
 )
 
 require (
@@ -35,7 +35,7 @@ require (
 	github.com/pierrec/lz4/v4 v4.1.21 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/prometheus/client_golang v1.21.0 // indirect
+	github.com/prometheus/client_golang v1.21.1 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.62.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
