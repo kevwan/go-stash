@@ -10,7 +10,7 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/vjeantet/jodaTime v1.0.0
 	github.com/zeromicro/go-queue v1.2.2
-	github.com/zeromicro/go-zero v1.8.2
+	github.com/zeromicro/go-zero v1.8.3
 )
 
 require (
