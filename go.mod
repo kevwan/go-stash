@@ -1,13 +1,14 @@
 module github.com/kevwan/go-stash
 
-go 1.22
+go 1.23
+
 toolchain go1.24.1
 
 require (
 	github.com/json-iterator/go v1.1.12
 	github.com/olivere/elastic/v7 v7.0.32
 	github.com/rogpeppe/go-internal v1.14.1
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.1
 	github.com/vjeantet/jodaTime v1.0.0
 	github.com/zeromicro/go-queue v1.2.2
 	github.com/zeromicro/go-zero v1.8.2
