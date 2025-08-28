@@ -1,6 +1,7 @@
 module github.com/kevwan/go-stash
 
-go 1.22
+go 1.23
+
 toolchain go1.24.1
 
 require (
@@ -10,7 +11,7 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/vjeantet/jodaTime v1.0.0
 	github.com/zeromicro/go-queue v1.2.2
-	github.com/zeromicro/go-zero v1.8.2
+	github.com/zeromicro/go-zero v1.9.0
 )
 
 require (
@@ -21,6 +22,8 @@ require (
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
+	github.com/grafana/pyroscope-go v1.2.4 // indirect
+	github.com/grafana/pyroscope-go/godeltaprof v0.1.8 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.20.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/klauspost/compress v1.17.11 // indirect
