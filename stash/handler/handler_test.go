@@ -52,10 +52,11 @@ func TestTimestampFilterIntegration(t *testing.T) {
 				if tt.expectValue != "" {
 					assert.Equal(t, tt.expectValue, timestamp)
 				} else {
-					// Verify it's a valid timestamp format
+					// Verify it's a valid timestamp format (ISO 8601)
+					const iso8601Format = "2006-01-02T15:04:05.000Z"
 					timestampStr, ok := timestamp.(string)
 					assert.True(t, ok)
-					_, err := time.Parse("2006-01-02T15:04:05.000Z", timestampStr)
+					_, err := time.Parse(iso8601Format, timestampStr)
 					assert.NoError(t, err, "Timestamp should be in ISO 8601 format")
 				}
 			}
