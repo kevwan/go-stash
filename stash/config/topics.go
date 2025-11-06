@@ -22,15 +22,24 @@ func FetchMatchingTopics(c KafkaConf) ([]string, error) {
 		return nil, err
 	}
 
-	// Connect to Kafka to fetch metadata
-	conn, err := kafka.DialContext(context.Background(), "tcp", c.Brokers[0])
-	if err != nil {
-		return nil, err
+	// Try connecting to each broker until one succeeds
+	var conn *kafka.Conn
+	var lastErr error
+	for _, broker := range c.Brokers {
+		conn, err = kafka.DialContext(context.Background(), "tcp", broker)
+		if err == nil {
+			break
+		}
+		lastErr = err
+	}
+	if conn == nil {
+		return nil, lastErr
 	}
 	defer conn.Close()
 
 	// Set deadline for the operation
-	if err := conn.SetDeadline(time.Now().Add(10 * time.Second)); err != nil {
+	deadline := 10 * time.Second
+	if err := conn.SetDeadline(time.Now().Add(deadline)); err != nil {
 		return nil, err
 	}
 

@@ -36,6 +36,25 @@ func (mh *MessageHandler) AddFilters(filters ...filter.FilterFunc) {
 	}
 }
 
+// ensureMetadataStructure ensures the @metadata.kafka structure exists in the message.
+func ensureMetadataStructure(m map[string]interface{}) map[string]interface{} {
+	if _, exists := m["@metadata"]; !exists {
+		m["@metadata"] = make(map[string]interface{})
+	}
+	metadata, ok := m["@metadata"].(map[string]interface{})
+	if !ok {
+		return nil
+	}
+	if _, exists := metadata["kafka"]; !exists {
+		metadata["kafka"] = make(map[string]interface{})
+	}
+	kafkaMeta, ok := metadata["kafka"].(map[string]interface{})
+	if !ok {
+		return nil
+	}
+	return kafkaMeta
+}
+
 func (mh *MessageHandler) Consume(_ context.Context, _, val string) error {
 	var m map[string]interface{}
 	if err := jsoniter.Unmarshal([]byte(val), &m); err != nil {
@@ -44,16 +63,8 @@ func (mh *MessageHandler) Consume(_ context.Context, _, val string) error {
 
 	// Inject Kafka metadata if topic is set
 	if mh.topic != "" {
-		if _, exists := m["@metadata"]; !exists {
-			m["@metadata"] = make(map[string]interface{})
-		}
-		if metadata, ok := m["@metadata"].(map[string]interface{}); ok {
-			if _, exists := metadata["kafka"]; !exists {
-				metadata["kafka"] = make(map[string]interface{})
-			}
-			if kafkaMeta, ok := metadata["kafka"].(map[string]interface{}); ok {
-				kafkaMeta["topic"] = mh.topic
-			}
+		if kafkaMeta := ensureMetadataStructure(m); kafkaMeta != nil {
+			kafkaMeta["topic"] = mh.topic
 		}
 	}
 
