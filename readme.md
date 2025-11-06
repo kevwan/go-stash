@@ -88,6 +88,7 @@ Clusters:
       GracePeriod: 10s
       Compress: false
       TimeZone: UTC
+      AddTimestamp: true
 ```
 
 ## Details
@@ -179,6 +180,9 @@ Offset: first
 
 #### TimeZone
 * Default value is UTC, Universal Standard Time
+
+#### AddTimestamp
+* Automatically add a @timestamp field to each document if it doesn't exist. The timestamp uses ISO 8601 format (e.g., 2022-01-01T00:00:00.000Z). Default is true. Set to false to disable automatic timestamp generation.
 
 ## ES performance write test
 

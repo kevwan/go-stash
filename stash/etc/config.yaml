@@ -44,3 +44,4 @@ Clusters:
         - http://172.16.141.4:9200
         - http://172.16.141.5:9200
       Index: "{.event}-{{yyyy-MM-dd}}"
+      AddTimestamp: true

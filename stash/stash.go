@@ -73,6 +73,10 @@ func main() {
 		indexer := es.NewIndex(client, processor.Output.ElasticSearch.Index, loc)
 		handle := handler.NewHandler(writer, indexer)
 		handle.AddFilters(filters...)
+		// Add timestamp filter if enabled (default is true)
+		if processor.Output.ElasticSearch.AddTimestamp {
+			handle.AddFilters(filter.TimestampFilter())
+		}
 		handle.AddFilters(filter.AddUriFieldFilter("url", "uri"))
 		for _, k := range toKqConf(processor.Input.Kafka) {
 			group.Add(kq.MustNewQueue(k, handle))
