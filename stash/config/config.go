@@ -23,6 +23,7 @@ type (
 		Compress      bool   `json:",default=false"`
 		Username      string `json:",optional"`
 		Password      string `json:",optional"`
+		AddTimestamp  bool   `json:",default=true"` // Add @timestamp field to documents
 	}
 
 	Filter struct {

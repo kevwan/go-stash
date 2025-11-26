@@ -85,6 +85,7 @@ Clusters:
       GracePeriod: 10s
       Compress: false
       TimeZone: UTC
+      AddTimestamp: true
 ```
 
 ## 详细说明
@@ -176,6 +177,9 @@ Offset: first
 
 ####  TimeZone
   默认值为UTC，世界标准时间
+
+#### AddTimestamp
+  自动为每个文档添加 @timestamp 时间戳字段（如果不存在）。时间戳使用 ISO 8601 格式（例如：2022-01-01T00:00:00.000Z）。默认值为 true。设置为 false 可禁用自动时间戳生成。
 
 
 
