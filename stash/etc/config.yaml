@@ -5,8 +5,11 @@ Clusters:
       Brokers:
         - "172.16.186.16:19092"
         - "172.16.186.17:19092"
+      # Use Topics for explicit topic list
       Topics:
         - k8slog
+      # Or use TopicsPattern for regex matching (takes precedence over Topics)
+      # TopicsPattern: "^app-.*-logs$"
       Group: pro
       Consumers: 16
   Filters:
@@ -43,4 +46,10 @@ Clusters:
       Hosts:
         - http://172.16.141.4:9200
         - http://172.16.141.5:9200
+      # Index can use field placeholders and metadata
+      # {.event} uses the 'event' field from the message
+      # {.@metadata.kafka.topic} uses the Kafka topic name
+      # {{yyyy-MM-dd}} uses date formatting
       Index: "{.event}-{{yyyy-MM-dd}}"
+      # Example with topic-based index:
+      # Index: "{.@metadata.kafka.topic}-{{yyyy-MM-dd}}"
