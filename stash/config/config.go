@@ -17,7 +17,7 @@ type (
 	ElasticSearchConf struct {
 		Hosts         []string
 		Index         string
-		DocType       string `json:",default=doc"`
+		DocType       string `json:",default=_doc"`
 		TimeZone      string `json:",optional"`
 		MaxChunkBytes int    `json:",default=15728640"` // default 15M
 		Compress      bool   `json:",default=false"`

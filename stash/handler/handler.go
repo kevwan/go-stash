@@ -6,6 +6,7 @@ import (
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kevwan/go-stash/stash/es"
 	"github.com/kevwan/go-stash/stash/filter"
+	"time"
 )
 
 type MessageHandler struct {
@@ -39,11 +40,7 @@ func (mh *MessageHandler) Consume(_ context.Context, _, val string) error {
 			return nil
 		}
 	}
+	m["timestamp"] = time.Now()
 
-	bs, err := jsoniter.Marshal(m)
-	if err != nil {
-		return err
-	}
-
-	return mh.writer.Write(index, string(bs))
+	return mh.writer.Write(index, m)
 }
