@@ -114,6 +114,21 @@ Offset: first
 #### Offset
   可选last和first，默认为last，表示从头从kafka开始读取数据
 
+#### Topics 和 TopicsPattern
+* **Topics**: 明确指定要消费的Kafka主题列表（例如：`["topic1", "topic2"]`）
+* **TopicsPattern**: 使用正则表达式模式匹配多个主题（例如：`"^logs-.*"` 匹配所有以"logs-"开头的主题）
+* 可以使用 `Topics` 或 `TopicsPattern`，但如果同时指定两者，`TopicsPattern` 优先
+* 使用模式匹配的示例：
+```yaml
+Input:
+  Kafka:
+    Brokers:
+      - "localhost:9092"
+    TopicsPattern: "^app-.*-logs$"
+    Group: mygroup
+```
+
+
 
 ### Filters
 
@@ -164,6 +179,17 @@ Offset: first
 
 #### Index
   索引名称，indexname-{{yyyy.MM.dd}}表示年.月.日，也可以用{{yyyy-MM-dd}}，格式自己定义
+  支持字段占位符，如 `{.field}` 来使用消息中的值
+  支持嵌套字段的点表示法，例如 `{.@metadata.kafka.topic}` 来使用Kafka主题名
+  使用基于主题的动态索引示例：
+```yaml
+Output:
+  ElasticSearch:
+    Hosts:
+      - "http://localhost:9200"
+    Index: "{.@metadata.kafka.topic}-{{yyyy-MM-dd}}"
+```
+这将创建按日期分隔的索引，如 `my-topic-2024-01-15`、`my-topic-2024-01-16` 等。
 
 #### MaxChunkBytes
   每次往ES提交的bulk大小，默认是5M，可依据ES的io情况，适当的调整

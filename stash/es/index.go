@@ -122,14 +122,36 @@ func buildIndexFormatter(indexFormat string, loc *time.Location) func(map[string
 				continue
 			}
 
-			if val, ok := m[attr]; ok {
-				vals = append(vals, val)
-			} else {
-				vals = append(vals, "")
-			}
+			val := getNestedValue(m, attr)
+			vals = append(vals, val)
 		}
 		return fmt.Sprintf(format, vals...)
 	}
+}
+
+// getNestedValue retrieves a value from a nested map using dot notation.
+// For example, "@metadata.kafka.topic" will traverse m["@metadata"]["kafka"]["topic"]
+func getNestedValue(m map[string]interface{}, path string) string {
+	parts := strings.Split(path, ".")
+	var current interface{} = m
+
+	for _, part := range parts {
+		if currentMap, ok := current.(map[string]interface{}); ok {
+			if val, exists := currentMap[part]; exists {
+				current = val
+			} else {
+				return ""
+			}
+		} else {
+			return ""
+		}
+	}
+
+	// Convert the final value to string
+	if str, ok := current.(string); ok {
+		return str
+	}
+	return fmt.Sprintf("%v", current)
 }
 
 func formatTime(format string, t time.Time) string {

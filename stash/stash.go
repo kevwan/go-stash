@@ -18,10 +18,15 @@ import (
 
 var configFile = flag.String("f", "etc/config.yaml", "Specify the config file")
 
-func toKqConf(c config.KafkaConf) []kq.KqConf {
-	var ret []kq.KqConf
+func toKqConf(c config.KafkaConf) ([]kq.KqConf, error) {
+	// Fetch topics based on pattern or explicit list
+	topics, err := config.FetchMatchingTopics(c)
+	if err != nil {
+		return nil, err
+	}
 
-	for _, topic := range c.Topics {
+	var ret []kq.KqConf
+	for _, topic := range topics {
 		ret = append(ret, kq.KqConf{
 			ServiceConf: c.ServiceConf,
 			Brokers:     c.Brokers,
@@ -38,7 +43,7 @@ func toKqConf(c config.KafkaConf) []kq.KqConf {
 		})
 	}
 
-	return ret
+	return ret, nil
 }
 
 func main() {
@@ -71,10 +76,15 @@ func main() {
 			loc = time.Local
 		}
 		indexer := es.NewIndex(client, processor.Output.ElasticSearch.Index, loc)
-		handle := handler.NewHandler(writer, indexer)
-		handle.AddFilters(filters...)
-		handle.AddFilters(filter.AddUriFieldFilter("url", "uri"))
-		for _, k := range toKqConf(processor.Input.Kafka) {
+
+		kqConfs, err := toKqConf(processor.Input.Kafka)
+		logx.Must(err)
+
+		for _, k := range kqConfs {
+			// Create a handler with topic information for metadata injection
+			handle := handler.NewHandlerWithTopic(writer, indexer, k.Topic)
+			handle.AddFilters(filters...)
+			handle.AddFilters(filter.AddUriFieldFilter("url", "uri"))
 			group.Add(kq.MustNewQueue(k, handle))
 		}
 	}

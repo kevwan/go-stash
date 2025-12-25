@@ -117,6 +117,20 @@ Offset: first
 #### Offset
 * Optional last and first, the default is last, which means read data from kafka from the beginning
 
+#### Topics and TopicsPattern
+* **Topics**: Explicit list of Kafka topics to consume from (e.g., `["topic1", "topic2"]`)
+* **TopicsPattern**: Regular expression pattern to match multiple topics (e.g., `"^logs-.*"` matches all topics starting with "logs-")
+* You can use either `Topics` or `TopicsPattern`, but `TopicsPattern` takes precedence if both are specified
+* Example with pattern matching:
+```yaml
+Input:
+  Kafka:
+    Brokers:
+      - "localhost:9092"
+    TopicsPattern: "^app-.*-logs$"
+    Group: mygroup
+```
+
 
 ### Filters
 
@@ -167,6 +181,17 @@ Offset: first
 
 #### Index
 * Index name, indexname-{{yyyy.MM.dd}} for year. Month. Day, or {{yyyy-MM-dd}}, in your own format
+* Supports field placeholders like `{.field}` to use values from the message
+* Supports nested fields with dot notation, e.g., `{.@metadata.kafka.topic}` to use the Kafka topic name
+* Example with dynamic topic-based index:
+```yaml
+Output:
+  ElasticSearch:
+    Hosts:
+      - "http://localhost:9200"
+    Index: "{.@metadata.kafka.topic}-{{yyyy-MM-dd}}"
+```
+This creates daily indices like `my-topic-2024-01-15`, `my-topic-2024-01-16`, etc.
 
 #### MaxChunkBytes
 * The size of the bulk submitted to ES each time, default is 5M, can be adjusted according to the ES io situation.
